@@ -17,11 +17,13 @@ El desarrollo con IA alcanza su máximo potencial cuando se elimina la ambigüed
 
 Cada fase reduce drásticamente errores, refactorizaciones costosas y malentendidos. Sin especificación, la IA adivina. Sin plan, improvisa. Sin reglas, genera inconsistencias.
 
+Los tres pilares se complementan con un principio transversal de trazabilidad: toda decisión significativa se documenta.
+
 ---
 
-## Fases de la metodología
+## Fases de la Metodología
 
-### Fase 0: Captura de Intencion
+### Fase 0: Captura de Intención
 
 **Objetivo**: Comprender profundamente la visión del usuario sin hacer suposiciones.
 
@@ -45,25 +47,25 @@ El usuario describe su idea en lenguaje natural. La IA realiza una entrevista es
 
 **Objetivo**: Crear un documento claro de requerimientos que sirva como **fuente única de verdad**.
 
-**Archivo recomendado**: docs/00_spec.md
+**Archivo recomendado**: `docs/00_spec.md`
 
 **Contenido mínimo**:
 
-Sección                        | Descripción
--------------------------------|------------
-Requerimientos Funcionales     | Qué hace el producto y cómo se comporta
-Requerimientos No Funcionales  | Rendimiento, seguridad, escalabilidad, compatibilidad
-Configuración y Parámetros     | Variables, defaults, rangos y opciones
-Tecnologías                    | Stack técnico
-Restricciones Técnicas         | Qué debe evitarse o limitarse
-Estructura de Archivos         | Arquitectura general del proyecto
-Criterios de Aceptación        | Cómo validar que el proyecto está completo
+| Sección                        | Descripción |
+|--------------------------------|-------------|
+| Requerimientos Funcionales     | Qué hace el producto y cómo se comporta |
+| Requerimientos No Funcionales  | Rendimiento, seguridad, escalabilidad, compatibilidad |
+| Configuración y Parámetros     | Variables, defaults, rangos y opciones |
+| Tecnologías                    | Stack técnico seleccionado |
+| Restricciones Técnicas         | Qué debe evitarse o limitarse |
+| Estructura de Archivos         | Arquitectura general del proyecto |
+| Criterios de Aceptación        | Cómo validar que el proyecto está completo |
 
 **Reglas**:
 - Usar lenguaje claro y accesible, evitando jerga técnica innecesaria.  
 - Incluir tablas, ejemplos y detalles visuales cuando aplique.  
-- Definir parámetros configurables.
-- La especificación describe **qué** se necesita, no **cómo** implementarlo.  
+- Definir todos los parámetros configurables.  
+- La especificación describe **qué** se necesita, **no cómo** implementarlo.  
 - El usuario debe revisar y **aprobar formalmente** la especificación antes de continuar.
 
 ---
@@ -72,21 +74,21 @@ Criterios de Aceptación        | Cómo validar que el proyecto está completo
 
 **Objetivo**: Desglosar el proyecto en incrementos lógicos, verificables y manejables.
 
-**Archivo recomendado**: docs/01_plan.md
+**Archivo recomendado**: `docs/01_plan.md`
 
-**Contenido minimo**:
+**Contenido mínimo**:
 
-| Seccion | Descripcion |
-|---------|-------------|
-| Convenciones del plan | Cómo interpretar checkboxes y estados |
-| Fases numeradas | Cada fase es un incremento funcional |
-| Checklist por fase | Tareas atomicas y verificables |
-| Archivos involucrados | Lista de archivos a crear o modificar |
-| Checkpoint | Comando o accion para probar que la fase funciona |
+| Sección                    | Descripción |
+|----------------------------|-------------|
+| Convenciones del plan      | Cómo interpretar checkboxes y estados |
+| Fases numeradas            | Incrementos funcionales claros |
+| Checklist por fase         | Tareas atómicas y verificables |
+| Archivos involucrados      | Lista de archivos a crear o modificar |
+| Checkpoint                 | Comando o acción para validar la fase |
 
 **Reglas**:
-- Cada fase debe generar algo **verificable** (un checkpoint).
-- Seguir un orden lógico: preparación → núcleo → funcionalidades → pulido.  
+- Cada fase debe generar algo **verificable** (un checkpoint).  
+- Seguir un orden lógico: preparación → núcleo → funcionalidades → pulido.
 
 **Formato recomendado**:
 
@@ -101,18 +103,18 @@ Criterios de Aceptación        | Cómo validar que el proyecto está completo
 **Objetivo**: Qué se logra en esta fase.
 
 ### Archivos a crear/modificar
-| Archivo | Accion |
+| Archivo | Acción |
 |---------|--------|
-| ... | ... |
+| ...     | ...    |
 
 ### Checklist
 - [ ] Tarea 1
 - [ ] Tarea 2
 
 ### Checkpoint
-\```
+```
 comando que verifica que funciona
-\```
+```
 ```
 
 ---
@@ -121,86 +123,86 @@ comando que verifica que funciona
 
 **Objetivo**: Establecer las normas de trabajo para todos los agentes de IA que participen en el proyecto.
 
-**Archivo recomendado**: AGENTS.md (en la raíz del proyecto)
+**Archivo recomendado**: `AGENTS.md` (en la raíz del proyecto)
 
-**Contenido minimo**:
+**Contenido mínimo**:
 
-| Seccion | Descripcion |
-|---------|-------------|
-Overview               | Descripción breve del proyecto
-Tech Stack             | Tecnologías, versiones, dependencias, herramientas
-Commands               | Comandos para dev, build, test
-Project Structure      | Estructura de carpetas y archivos
-Code Conventions       | Estilo de nombres, patrones, restricciones , preferencias de código, etc.
-Testing                | Framework, qué y cómo probar
-Architecture Notes     | Decisiones de diseño importantes 
-Prohibitions           | Qué nunca hacer
-Session preparation    | Leer documentos base 00_spec.md, 01_plan.md y 02_decisions.md al inicio de cada sesión
+| Sección              | Descripción |
+|----------------------|-------------|
+| Overview             | Descripción breve del proyecto |
+| Tech Stack           | Tecnologías, versiones, dependencias y herramientas |
+| Commands             | Comandos para dev, build, test, etc. |
+| Project Structure    | Estructura de carpetas y archivos |
+| Code Conventions     | Estilo de nombres, patrones y restricciones |
+| Testing              | Framework, qué y cómo probar |
+| Architecture Notes   | Decisiones de diseño importantes |
+| Prohibitions         | Qué nunca hacer |
+| Session Preparation  | Reglas de lectura de documentos base |
 
-**Reglas**:  
+**Reglas**:
 - Este documento se crea **después** de tener el scaffold inicial del proyecto.  
 - Debe contener comandos reales y actuales.  
 - Actualizarlo cuando cambien convenciones o tecnologías.
-- Los documentos 00_spec.md, 01_plan.md y 02_decisions.md son la fuente principal de verdad.
+
+**Regla Cardinal**:
+Antes de cualquier acción o generación de código, leer completamente y tener en contexto:
+- `docs/00_spec.md` (fuente de requerimientos)
+- `docs/01_plan.md` (plan actual)
+- `docs/02_decisions.md` (decisiones tomadas)
 
 ---
 
-### Fase 4: Ejecucion
+### Fase 4: Ejecución
 
-**Objetivo**: Implementar el plan fase por fase, verificando cada checkpoint.
+**Objetivo**: Implementar el plan de forma controlada, fase por fase, verificando cada checkpoint.
 
-**Archivo recomendado**: docs/02_decisions.md 
+Durante esta fase se mantendrá el archivo docs/02_decisions.md, donde se registrarán todas las decisiones importantes de arquitectura, diseño o estratégicas que surjan durante la implementación.
+
+**Archivo recomendado**: `docs/02_decisions.md`
 
 **Formato recomendado**: ADR (Architecture Decision Records)
 
 ```
-# Nombre del Proyecto - Decisiones de Arquitectura y Diseño (ADR)
-
-Registro de decisiones importantes tomadas durante el desarrollo.
-
----
+# Decisiones de Arquitectura y Diseño
 
 ## Convenciones
-
+- **ID**: ADR-001, ADR-002, ...
 - **Fecha**: YYYY-MM-DD
 - **Estado**: Propuesta | Aceptada | Rechazada | Obsoleta
-- **Contexto**: Situación que obligó a tomar la decisión
-- **Decisión**: Qué se decidió
-- **Consecuencias**: Pros, contras y efectos
 
 ---
 
-## Decisiones
+### [ADR-001] - Título corto de la decisión
 
-### [ADR-001] - Fecha - Título corto de la decisión
-
+**Fecha**: 2026-06-06  
 **Estado**: Aceptada
 
-**Contexto**:  
-...
+**Contexto**  
+(¿Qué problema o situación obligó a tomar esta decisión?)
 
-**Decisión**:  
-...
+**Decisión**  
+(Qué se decidió y por qué)
 
-**Alternativas consideradas**:  
+**Alternativas consideradas**  
 - Opción 1: ...
 - Opción 2: ...
 
-**Consecuencias**:  
+**Consecuencias**  
 - Positivas: ...
 - Negativas / Riesgos: ...
-- Requiere cambios en: ...
+- Requiere actualizar: ...
 ```
 
 **Reglas**:
-- Leer documentos base 00_spec.md, 01_plan.md y 02_decisions.md al inicio de cada sesión.
-- Seguir el orden del plan.
-- Verificar el checkpoint de cada fase antes de avanzar.
-- Si un checkpoint falla, arreglar antes de continuar.
-- No agregar funcionalidades fuera del plan (crear nueva issue o fase si es necesario).  
-- Las decisiones importantes que surjan durante la ejecución se documentarán en docs/02_decisions.md usando formato ADR (Architecture Decision Records).
+- Leer los documentos base (`00_spec.md`, `01_plan.md` y `02_decisions.md`) al inicio de cada sesión.  
+- Seguir estrictamente el orden del plan.  
+- Verificar el checkpoint de cada fase antes de avanzar.  
+- Si un checkpoint falla, resolverlo antes de continuar.  
+- No agregar funcionalidades fuera del plan (crear nueva fase o issue si es necesario).  
+- Toda decisión significativa que afecte la arquitectura, tecnologías, patrones de diseño o trade-offs debe documentarse antes de implementarla.
 - El usuario mantiene el control total de Git. La IA **no** realiza commits.  
-- Controlar ventana de contexto de la IA: Trabajar idealmente una o dos fases por sesión.
+- Controlar ventana de contexto de la IA: Trabajar idealmente una o dos fases por sesión.  
+- La IA tiene autorización explícita para cuestionar inconsistencias, riesgos o fallas detectadas.
 
 ---
 
@@ -250,13 +252,12 @@ IDEA DEL USUARIO
 ## Mejores Prácticas
 
 - **Menos es más**: Una especificación concisa es mejor que una extensa.  
-- **Checkpoints obligatorios**: si no se puede verificar, la fase no está completa.
-- **AGENTS.md vivo**: actualizarlo si cambian convenciones o comandos.
-- **No hacer commits desde la IA**: el usuario controla git. La IA solo escribe codigo.
-- **Sesiones enfocadas**: no intentar hacer todo en un solo chat.
-- **Preguntar antes de asumir**: si algo no esta claro, preguntar al usuario.
-- **Autorización para Cuestionar**: La IA tiene permiso explícito y debe cuestionar al usuario cuando detecte errores lógicos, inconsistencias, ambigüedades, posibles problemas de seguridad, rendimiento, escalabilidad o violaciones de las reglas definidas. El usuario aclarará explícitamente cómo proceder en esos casos.
-- **Documentar decisiones**: Toda decisión significativa (arquitectura, stack, patrones, trade-offs) debe registrarse para mantener trazabilidad y facilitar futuras revisiones o incorporación de nuevos colaboradores.
+- **Checkpoints obligatorios**: Si no se puede verificar, la fase no está lista.  
+- **AGENTS.md vivo**: Actualizarlo si cambian convenciones o comandos. 
+- **Autorización para Cuestionar**: La IA debe alertar sobre errores, inconsistencias o riesgos detectados.  
+- **Documentar decisiones**: Toda decisión significativa va en `02_decisions.md`.  
+- **Sesiones enfocadas**: Mejor una o dos fases por conversación.
+- **No hacer commits desde la IA**: El usuario controla git. La IA solo escribe codigo.
 
 ---
 
@@ -264,13 +265,13 @@ IDEA DEL USUARIO
 
 ```
 proyecto/
-├── AGENTS.md              ← reglas para agentes
+├── AGENTS.md
 ├── docs/
-│   ├── 00_spec.md         ← especificacion
-│   └── 01_plan.md         ← plan de implementacion
-|   ├── 02_decisions.md    ← Decisiones importantes
-├── src/  
-│   └── ...
-├── tests/  
-├── README.md  
+│   ├── 00_spec.md
+│   ├── 01_plan.md
+│   └── 02_decisions.md
+├── src/
+├── tests/
+└── README.md
 ```
+
