@@ -45,6 +45,49 @@ En la carpeta `templates/` encontrarás plantillas listas para usar en tus proye
 
 ---
 
+## Skill para opencode
+
+Esta metodología está disponible como **skill** para [opencode](https://opencode.ai), permitiendo que el agente de IA aplique la metodología ITSD automáticamente al detectar que estás iniciando un nuevo proyecto.
+
+**Archivo:** `SKILL.md` (en la raíz de este repositorio)
+
+### Integración con opencode
+
+Para usar el skill con opencode, copia el archivo `SKILL.md` a una de estas ubicaciones:
+
+| Ubicación | Alcance | Comando |
+|-----------|---------|---------|
+| Global (todos los proyectos) | `~/.config/opencode/skills/itsd-dev/SKILL.md` | `cp SKILL.md ~/.config/opencode/skills/itsd-dev/` |
+| Por proyecto | `.opencode/skills/itsd-dev/SKILL.md` | `cp SKILL.md <tu-proyecto>/.opencode/skills/itsd-dev/` |
+
+**Ubicación global** (recomendado para uso personal):
+```bash
+mkdir -p ~/.config/opencode/skills/itsd-dev
+cp SKILL.md ~/.config/opencode/skills/itsd-dev/
+```
+
+**Ubicación por proyecto** (para compartir en el repositorio):
+```bash
+mkdir -p <tu-proyecto>/.opencode/skills/itsd-dev
+cp SKILL.md <tu-proyecto>/.opencode/skills/itsd-dev/
+```
+
+Después de copiar el archivo, **reinicia opencode** para que cargue el nuevo skill.
+
+### Uso
+
+Una vez integrado, el skill se activa automáticamente cuando el agente detecta intenciones como:
+
+- "Tengo una idea para un proyecto"
+- "Quiero crear una app"
+- "Nuevo proyecto desde cero"
+- "Definir especificación"
+- "New project from an idea"
+
+El agente seguirá las 5 fases de ITSD: Captura de Intención → Especificación → Plan → Reglas de Agentes → Ejecución.
+
+---
+
 ## Inicio Rápido
 
 1. Lee la [documentación completa](./Intent-To-Spec-Development.md)
