@@ -1,5 +1,14 @@
 # [Nombre del Proyecto] - Reglas para Agentes IA
 
+## Autonomía (ITSD-A)
+
+- **Nivel de autonomía:** L0 (ITSD clásico) | L1 | L2 | L3 — ver `ITSD-A.md`
+- **Reglas de parada:** irreversible, dinero, secretos, checkpoint fallido > K, nueva bloqueante, presupuesto agotado
+- **Git:** L0 sin commits de la IA; L1+ rama `agent/<tarea>` + PR; `main` protegido
+- **Verificación:** `./verify.sh`
+- **Estado / lock:** `docs/03_state.md`, `.itsd/lock`
+- **Presupuestos:** tiempo por fase ___ · intentos por checkpoint K=3 · costo máx. ___
+
 ## Overview
 
 Breve descripción del proyecto (1-2 párrafos).
