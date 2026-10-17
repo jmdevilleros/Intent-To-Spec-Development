@@ -45,6 +45,22 @@ En la carpeta `templates/` encontrarás plantillas listas para usar en tus proye
 
 ---
 
+## Modo Autónomo: ITSD-A
+
+Variante de ITSD con **niveles de autonomía L0–L3** para agentes de IA. Mantiene los mismos artefactos, pero reduce las compuertas humanas a intención, gusto y aceptación final; el resto se verifica automáticamente (`verify.sh`) y se notifica. L0 equivale a ITSD clásico.
+
+➡️ **[Consulta ITSD-A.md](./ITSD-A.md)**
+
+| Template | Uso |
+|----------|-----|
+| `templates/00_intent_template.md` | Intención, preguntas clasificadas (bloqueante/supuesta/diferida), supuestos |
+| `templates/03_state_template.md` | Estado para reanudar sesiones |
+| `templates/04_acceptance_template.md` | Guion de demo de aceptación humana |
+| `templates/verify_template.sh` | Esqueleto del arnés de verificación |
+| `templates/lock_spec.md` | Bloqueo de workspace multi-agente |
+
+---
+
 ## Skill para opencode
 
 Esta metodología está disponible como **skill** para [opencode](https://opencode.ai), permitiendo que el agente de IA aplique la metodología ITSD automáticamente al detectar que estás iniciando un nuevo proyecto.
