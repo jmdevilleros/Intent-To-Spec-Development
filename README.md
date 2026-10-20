@@ -110,3 +110,9 @@ El agente seguirá las 5 fases de ITSD: Captura de Intención → Especificació
 2. Copia los templates a tu proyecto
 3. Sigue las 4 fases en orden con tu agente de IA
 4. Mantén la trazabilidad documentando decisiones importantes
+
+---
+
+## Licencia
+
+Este proyecto está bajo la licencia MIT. Consulta el archivo [LICENSE](./LICENSE).
