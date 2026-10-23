@@ -6,7 +6,7 @@
 
 ## ¿Qué es ITSD?
 
-ITSD es una metodología estructurada para trabajar eficientemente con agentes de IA en proyectos de software. Establece un flujo claro en 4 fases que garantiza que:
+ITSD es una metodología estructurada para trabajar eficientemente con agentes de IA en proyectos de software. Establece un flujo claro en 5 fases, numeradas de la Fase 0 a la Fase 4, que garantiza que:
 
 - La IA entienda exactamente **qué** construir (especificación)
 - Sepa **cómo** hacerlo de forma ordenada (plan)
@@ -131,7 +131,7 @@ En los agentes que permiten invocar skills como comando, también puedes llamarl
 /itsd-dev continuar    # retomar la siguiente fase pendiente del plan
 ```
 
-El agente seguirá las 5 fases de ITSD: Captura de Intención → Especificación → Plan → Reglas de Agentes → Ejecución. Si el `AGENTS.md` del proyecto declara un nivel de autonomía L1–L3, aplica además [ITSD-A](./ITSD-A.md).
+El agente seguirá las 5 fases de ITSD (Fase 0 a Fase 4): Captura de Intención → Especificación → Plan → Reglas de Agentes → Ejecución. Si el `AGENTS.md` del proyecto declara un nivel de autonomía L1–L3, aplica además [ITSD-A](./ITSD-A.md).
 
 ---
 
@@ -139,7 +139,7 @@ El agente seguirá las 5 fases de ITSD: Captura de Intención → Especificació
 
 1. Lee la [documentación completa](./Intent-To-Spec-Development.md)
 2. Copia los templates a tu proyecto
-3. Sigue las 4 fases en orden con tu agente de IA
+3. Sigue las 5 fases en orden (Fase 0 a Fase 4) con tu agente de IA
 4. Mantén la trazabilidad documentando decisiones importantes
 
 ---

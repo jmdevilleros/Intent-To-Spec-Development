@@ -2,8 +2,8 @@
 name: itsd-dev
 description: >-
   Intent-to-Spec Development (ITSD): metodología estructurada para desarrollo de
-  software asistido por IA. Convierte una idea vaga en un producto funcional en 5 fases:
-  Captura de Intención, Especificación (docs/00_spec.md), Plan de Implementación
+  software asistido por IA. Convierte una idea vaga en un producto funcional en 5 fases
+  (Fase 0 a Fase 4): Captura de Intención, Especificación (docs/00_spec.md), Plan de Implementación
   (docs/01_plan.md), Reglas para Agentes (AGENTS.md) y Ejecución con registro de
   decisiones (docs/02_decisions.md). Incluye templates y el modo autónomo ITSD-A
   (niveles L0-L3). Use when starting a new project from an idea, writing a project
@@ -60,6 +60,8 @@ Sin especificación, la IA adivina. Sin plan, improvisa. Sin reglas, genera inco
 ---
 
 ## Pipeline de Fases
+
+ITSD consta de **5 fases**, numeradas de la **Fase 0** a la **Fase 4**.
 
 ```
 IDEA DEL USUARIO

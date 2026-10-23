@@ -23,6 +23,8 @@ Los tres pilares se complementan con un principio transversal de trazabilidad: t
 
 ## Fases de la Metodología
 
+ITSD consta de **5 fases**, numeradas de la **Fase 0** a la **Fase 4**.
+
 ### Fase 0: Captura de Intención
 
 **Objetivo**: Comprender profundamente la visión del usuario sin hacer suposiciones.
