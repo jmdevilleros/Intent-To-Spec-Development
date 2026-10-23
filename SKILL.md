@@ -1,8 +1,24 @@
 ---
 name: itsd-dev
-description: |
-  Intent-to-Spec Development (ITSD) — Structured methodology for AI-assisted software development. Transforms vague ideas into working products through 5 phases: Intent Capture, Specification, Implementation Plan, Agent Rules, and Execution.
-  Use when: starting a new project from an idea, creating a project specification, building an implementation plan, defining AI agent rules, structured software development, "tengo una idea", "nuevo proyecto", "crear app", "empezar desde cero", "definir especificación", "metodología de desarrollo".
+description: >-
+  Intent-to-Spec Development (ITSD): metodología estructurada para desarrollo de
+  software asistido por IA. Convierte una idea vaga en un producto funcional en 5 fases
+  (Fase 0 a Fase 4): Captura de Intención, Especificación (docs/00_spec.md), Plan de Implementación
+  (docs/01_plan.md), Reglas para Agentes (AGENTS.md) y Ejecución con registro de
+  decisiones (docs/02_decisions.md). Incluye templates y el modo autónomo ITSD-A
+  (niveles L0-L3). Use when starting a new project from an idea, writing a project
+  specification, building an implementation plan, or defining AI agent rules.
+when-to-use: >-
+  "tengo una idea", "nuevo proyecto", "crear app", "empezar desde cero", "definir
+  especificación", "plan de implementación", "metodología de desarrollo", "reglas para
+  agentes", "AGENTS.md", "new project from an idea", "write a spec", "structured
+  software development", "ITSD", "ITSD-A", "modo autónomo".
+argument-hint: "[fase|continuar]"
+user-invocable: true
+license: MIT
+metadata:
+  author: jmdevilleros
+  short-description: Idea → spec → plan → AGENTS.md → ejecución, con templates y modo autónomo ITSD-A.
 ---
 
 # Intent-to-Spec Development (ITSD)
@@ -10,6 +26,22 @@ description: |
 **Metodología de desarrollo asistido por IA**
 
 Transforma ideas vagas en productos funcionales mediante especificaciones claras, planes detallados y reglas explícitas para agentes de código.
+
+---
+
+## Archivos del skill
+
+Este skill funciona con cualquier agente o harness que lea `SKILL.md` (Grok Build, Claude Code, Cursor, opencode, `.agents`, etc.). Las instrucciones son independientes de la herramienta: donde se dice "leer", "crear" o "ejecutar", usa las herramientas equivalentes de tu entorno.
+
+| Archivo | Uso |
+|---------|-----|
+| `Intent-To-Spec-Development.md` | Documentación completa de la metodología |
+| `ITSD-A.md` | Modo autónomo: niveles L0–L3, compuertas, `verify.sh`, estado y bloqueo multi-agente |
+| `templates/` | Plantillas de `00_spec`, `01_plan`, `02_decisions`, `AGENTS.md` y las de ITSD-A (`00_intent`, `03_state`, `04_acceptance`, `verify_template.sh`, `lock_spec.md`) |
+
+Las rutas de esta tabla son relativas al directorio de este skill; resuélvelas antes de usarlas. Las rutas `docs/...` y `AGENTS.md` de las fases se refieren al **proyecto del usuario**. Si los archivos de `templates/` no están disponibles, usa los templates incluidos en este documento.
+
+Si el `AGENTS.md` del proyecto declara un **nivel de autonomía** (L1–L3), aplica además las reglas de `ITSD-A.md`; donde difieran de las de este documento (p. ej. commits en rama propia), prevalece `ITSD-A.md` para ese nivel. Sin nivel declarado, se asume **L0** (ITSD clásico, descrito aquí).
 
 ---
 
@@ -28,6 +60,8 @@ Sin especificación, la IA adivina. Sin plan, improvisa. Sin reglas, genera inco
 ---
 
 ## Pipeline de Fases
+
+ITSD consta de **5 fases**, numeradas de la **Fase 0** a la **Fase 4**.
 
 ```
 IDEA DEL USUARIO
