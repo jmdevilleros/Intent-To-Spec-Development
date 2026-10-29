@@ -61,6 +61,19 @@ Variante de ITSD con **niveles de autonomía L0–L3** para agentes de IA. Manti
 
 ---
 
+## Modo por ciclos: ITSD-C
+
+Modo **opcional** para un producto que abre un segundo ciclo. Al abrirlo, el expediente del primero sale del núcleo. El núcleo se queda corto, cada ciclo tiene su spec y su plan, y la sesión lee el núcleo más el ciclo en curso. No añade fases y no cambia los niveles L0–L3. Sin la declaración en `AGENTS.md`, el proyecto sigue con un solo spec, un solo plan y un solo registro.
+
+➡️ **[Consulta ITSD-C.md](./ITSD-C.md)**
+
+| Template | Uso |
+|----------|-----|
+| `templates/cycle_spec_template.md` | Spec de un ciclo: RF propios, parámetros propios, qué no se reabre |
+| `templates/cycle_plan_template.md` | Fases de ese ciclo, con la numeración del producto |
+
+---
+
 ## Skill para agentes de IA
 
 Esta metodología está disponible como **skill genérico** (formato `SKILL.md` con frontmatter YAML), compatible con cualquier agente o harness que soporte skills: Grok Build, Claude Code, Cursor, opencode y otros que lean `.agents/skills/`. El agente aplica ITSD automáticamente al detectar que estás iniciando un nuevo proyecto.
@@ -73,6 +86,7 @@ itsd-dev/                              # la raíz del repo es la carpeta del ski
 ├── README.md
 ├── Intent-To-Spec-Development.md      # documentación completa
 ├── ITSD-A.md                          # modo autónomo (L0–L3)
+├── ITSD-C.md                          # modo opcional por ciclos
 ├── CHANGELOG.md
 └── templates/                         # plantillas ITSD e ITSD-A
 ```
@@ -107,10 +121,10 @@ Si prefieres copiar solo lo necesario:
 
 ```bash
 mkdir -p ~/.agents/skills/itsd-dev
-cp -r SKILL.md Intent-To-Spec-Development.md ITSD-A.md templates ~/.agents/skills/itsd-dev/
+cp -r SKILL.md Intent-To-Spec-Development.md ITSD-A.md ITSD-C.md templates ~/.agents/skills/itsd-dev/
 ```
 
-`SKILL.md` es autosuficiente (incluye los templates de las fases 1–4); los demás archivos añaden la documentación completa y el modo ITSD-A.
+`SKILL.md` es autosuficiente (incluye los templates de las fases 1–4); los demás archivos añaden la documentación completa, el modo ITSD-A y el modo por ciclos ITSD-C.
 
 Reinicia la sesión del agente, o recarga los skills, para que detecte el nuevo skill.
 
@@ -132,6 +146,8 @@ En los agentes que permiten invocar skills como comando, también puedes llamarl
 ```
 
 El agente seguirá las 5 fases de ITSD (Fase 0 a Fase 4): Captura de Intención → Especificación → Plan → Reglas de Agentes → Ejecución. Si el `AGENTS.md` del proyecto declara un nivel de autonomía L1–L3, aplica además [ITSD-A](./ITSD-A.md).
+
+Si además declara ciclos, la lectura de sesión sigue [ITSD-C](./ITSD-C.md).
 
 ---
 

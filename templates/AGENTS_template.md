@@ -9,6 +9,12 @@
 - **Estado / lock:** `docs/03_state.md`, `.itsd/lock`
 - **Presupuestos:** tiempo por fase ___ · intentos por checkpoint K=3 · costo máx. ___
 
+## Ciclos (ITSD-C)
+
+- **Modo:** un solo expediente | ciclos — ver `ITSD-C.md`
+- **Carpeta:** `docs/cycles/`
+- **Ciclo en curso:** (vacío si el modo es un solo expediente)
+
 ## Overview
 
 Breve descripción del proyecto (1-2 párrafos).
@@ -58,6 +64,8 @@ Decisiones importantes de diseño.
    - `docs/00_spec.md`
    - `docs/01_plan.md`
    - `docs/02_decisions.md`
+
+   Si el modo es **ciclos**, esa lista no incluye ciclos cerrados ni el archivo de ADR. Se lee el núcleo y el par del ciclo en curso. El detalle está en `ITSD-C.md`.
 
 2. **Autorización para Cuestionar**  
    Tienes permiso explícito para alertar sobre inconsistencias, riesgos o mejoras.

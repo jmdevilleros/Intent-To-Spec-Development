@@ -5,20 +5,21 @@ description: >-
   software asistido por IA. Convierte una idea vaga en un producto funcional en 5 fases
   (Fase 0 a Fase 4): Captura de Intención, Especificación (docs/00_spec.md), Plan de Implementación
   (docs/01_plan.md), Reglas para Agentes (AGENTS.md) y Ejecución con registro de
-  decisiones (docs/02_decisions.md). Incluye templates y el modo autónomo ITSD-A
-  (niveles L0-L3). Use when starting a new project from an idea, writing a project
+  decisiones (docs/02_decisions.md). Incluye templates, el modo autónomo ITSD-A
+  (niveles L0-L3) y el modo opcional por ciclos ITSD-C. Use when starting a new project from an idea, writing a project
   specification, building an implementation plan, or defining AI agent rules.
 when-to-use: >-
   "tengo una idea", "nuevo proyecto", "crear app", "empezar desde cero", "definir
   especificación", "plan de implementación", "metodología de desarrollo", "reglas para
   agentes", "AGENTS.md", "new project from an idea", "write a spec", "structured
-  software development", "ITSD", "ITSD-A", "modo autónomo".
+  software development", "ITSD", "ITSD-A", "modo autónomo", "ITSD-C",
+  "producto por ciclos", "segundo ciclo".
 argument-hint: "[fase|continuar]"
 user-invocable: true
 license: MIT
 metadata:
   author: jmdevilleros
-  short-description: Idea → spec → plan → AGENTS.md → ejecución, con templates y modo autónomo ITSD-A.
+  short-description: Idea → spec → plan → AGENTS.md → ejecución, con templates, ITSD-A y ciclos ITSD-C.
 ---
 
 # Intent-to-Spec Development (ITSD)
@@ -37,11 +38,14 @@ Este skill funciona con cualquier agente o harness que lea `SKILL.md` (Grok Buil
 |---------|-----|
 | `Intent-To-Spec-Development.md` | Documentación completa de la metodología |
 | `ITSD-A.md` | Modo autónomo: niveles L0–L3, compuertas, `verify.sh`, estado y bloqueo multi-agente |
-| `templates/` | Plantillas de `00_spec`, `01_plan`, `02_decisions`, `AGENTS.md` y las de ITSD-A (`00_intent`, `03_state`, `04_acceptance`, `verify_template.sh`, `lock_spec.md`) |
+| `ITSD-C.md` | Modo opcional por ciclos: núcleo corto, par spec/plan por ciclo, lectura del ciclo en curso |
+| `templates/` | Plantillas de `00_spec`, `01_plan`, `02_decisions`, `AGENTS.md`, las de ITSD-A (`00_intent`, `03_state`, `04_acceptance`, `verify_template.sh`, `lock_spec.md`) y las de ITSD-C (`cycle_spec_template.md`, `cycle_plan_template.md`) |
 
 Las rutas de esta tabla son relativas al directorio de este skill; resuélvelas antes de usarlas. Las rutas `docs/...` y `AGENTS.md` de las fases se refieren al **proyecto del usuario**. Si los archivos de `templates/` no están disponibles, usa los templates incluidos en este documento.
 
 Si el `AGENTS.md` del proyecto declara un **nivel de autonomía** (L1–L3), aplica además las reglas de `ITSD-A.md`; donde difieran de las de este documento (p. ej. commits en rama propia), prevalece `ITSD-A.md` para ese nivel. Sin nivel declarado, se asume **L0** (ITSD clásico, descrito aquí).
+
+Si el `AGENTS.md` del proyecto declara **ciclos** (ITSD-C), la lectura de sesión y el lugar de los RF siguen `ITSD-C.md`. Declarar ciclos no cambia el nivel de autonomía. Sin esa declaración, el proyecto usa un solo spec, un solo plan y un solo registro de ADR, y se leen enteros. Si ITSD-C y el nivel discrepan en la lectura, manda ITSD-C. Si discrepan en commits o compuertas, manda el nivel.
 
 ---
 
@@ -154,6 +158,7 @@ Conjunto de decisiones documentadas que alimentan la Fase 1.
 - La especificación describe **qué** se necesita, **no cómo** implementarlo.
 - El usuario debe revisar y **aprobar formalmente** la especificación antes de continuar.
 - Definir todos los parámetros configurables.
+- Si el proyecto declara ciclos, este archivo guarda solo las reglas que cruzan ciclos. Los RF del ciclo viven en su spec. Ver `ITSD-C.md`.
 
 ### Template — Genera este archivo en `docs/00_spec.md`
 
@@ -226,6 +231,7 @@ Descripción general de la arquitectura de carpetas esperada.
 - Cada fase debe generar algo **verificable** (un checkpoint).
 - Seguir un orden lógico: preparación → núcleo → funcionalidades → pulido.
 - Los checkpoints deben ser comandos ejecutables, no descripciones vagas.
+- Si el proyecto declara ciclos, este archivo no conserva los checklists cerrados. Apunta al plan del ciclo abierto. Ver `ITSD-C.md`.
 
 ### Template — Genera este archivo en `docs/01_plan.md`
 
@@ -340,6 +346,8 @@ Decisiones importantes de diseño.
    - `docs/01_plan.md`
    - `docs/02_decisions.md`
 
+   Si `AGENTS.md` declara ciclos, esa lista no incluye ciclos cerrados ni el archivo de ADR. Se lee el núcleo y el par del ciclo en curso (`ITSD-C.md`).
+
 2. **Autorización para Cuestionar**
    Tienes permiso explícito para alertar sobre inconsistencias, riesgos o mejoras.
 
@@ -370,7 +378,7 @@ Al generar el `AGENTS.md` del proyecto destino, incluir estas secciones basadas 
 
 ### Reglas de ejecución
 
-1. **Leer documentos base al inicio de cada sesión.** Siempre leer: `00_spec.md`, `01_plan.md`, `02_decisions.md`.
+1. **Leer documentos base al inicio de cada sesión.** Sin ciclos declarados, leer `00_spec.md`, `01_plan.md` y `02_decisions.md`. Con ciclos declarados en `AGENTS.md`, la lectura la define `ITSD-C.md`: el núcleo y el par del ciclo en curso. Un ciclo cerrado y el archivo de ADR se abren cuando la tarea cambia el comportamiento de ese ciclo, cuando nombra ese archivo, o cuando nombra el ADR concreto.
 2. **Seguir estrictamente el orden del plan.**
 3. **Verificar el checkpoint de cada fase antes de avanzar.**
 4. **Si un checkpoint falla, resolverlo antes de continuar.**
@@ -427,13 +435,13 @@ Qué se decidió exactamente.
 
 Cuando el usuario solicite continuar con la implementación:
 
-1. **Leer documentos base** en este orden: `00_spec.md` → `01_plan.md` → `02_decisions.md`.
-2. **Identificar la fase actual** buscando el primer checkbox `[ ]` sin completar en `01_plan.md`.
-3. **Verificar que la fase anterior fue completada** (todos sus checkboxes en `[x]`).
+1. **Leer documentos base** en este orden: `00_spec.md` → `01_plan.md` → `02_decisions.md`. Si el proyecto declara ciclos, seguir la lectura de `ITSD-C.md`. Esa lectura no abre un ciclo cerrado ni el archivo de ADR, salvo en los casos que `ITSD-C.md` dice.
+2. **Identificar la fase actual** buscando el primer checkbox `[ ]` sin completar en `01_plan.md`. Si el proyecto declara ciclos, ese checkbox está en el plan del ciclo en curso. `01_plan.md` solo apunta a ese plan.
+3. **Verificar que la fase anterior fue completada** (todos sus checkboxes en `[x]`). Si el proyecto declara ciclos, esa comprobación se hace en el plan del ciclo en curso o en `03_state.md`. No se abre un ciclo cerrado para comprobarla.
 4. **Ejecutar las tareas** de la fase actual.
 5. **Verificar el checkpoint** antes de marcar la fase como completada.
 6. **Si hay decisiones significativas**, documentarlas en `02_decisions.md` antes de implementar.
-7. **Actualizar checkboxes** en `01_plan.md` a medida que se completan tareas.
+7. **Actualizar checkboxes** en `01_plan.md` a medida que se completan tareas. Si el proyecto declara ciclos, los checkboxes se marcan en el plan del ciclo en curso. `01_plan.md` solo apunta a ese plan.
 
 ---
 
@@ -462,3 +470,5 @@ proyecto/
 ├── tests/
 └── README.md
 ```
+
+Esa estructura es la de un producto de un solo ciclo. Con más de un ciclo, el árbol y la lectura están en `ITSD-C.md`.

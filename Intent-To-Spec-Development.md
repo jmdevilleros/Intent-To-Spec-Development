@@ -152,6 +152,8 @@ Antes de cualquier acción o generación de código, leer completamente y tener 
 - `docs/01_plan.md` (plan actual)
 - `docs/02_decisions.md` (decisiones tomadas)
 
+Si el proyecto declara el modo por ciclos, esa lectura la define `ITSD-C.md`: el núcleo y el par del ciclo en curso. Un ciclo cerrado y el archivo de ADR se abren cuando la tarea cambia el comportamiento de ese ciclo, cuando nombra ese archivo, o cuando nombra el ADR concreto.
+
 ---
 
 ### Fase 4: Ejecución
@@ -196,7 +198,7 @@ Durante esta fase se mantendrá el archivo docs/02_decisions.md, donde se regist
 ```
 
 **Reglas**:
-- Leer los documentos base (`00_spec.md`, `01_plan.md` y `02_decisions.md`) al inicio de cada sesión.  
+- Leer los documentos base (`00_spec.md`, `01_plan.md` y `02_decisions.md`) al inicio de cada sesión. Con ciclos declarados, seguir `ITSD-C.md`.
 - Seguir estrictamente el orden del plan.  
 - Verificar el checkpoint de cada fase antes de avanzar.  
 - Si un checkpoint falla, resolverlo antes de continuar.  
@@ -260,6 +262,7 @@ IDEA DEL USUARIO
 - **Documentar decisiones**: Toda decisión significativa va en `02_decisions.md`.  
 - **Sesiones enfocadas**: Mejor una o dos fases por conversación.
 - **No hacer commits desde la IA**: El usuario controla git. La IA solo escribe codigo.
+- **Un ciclo, un par de archivos**: Cuando el producto abre otro ciclo, no se alarga el spec único. Se declara ITSD-C.
 
 ---
 
@@ -276,4 +279,6 @@ proyecto/
 ├── tests/
 └── README.md
 ```
+
+Esa estructura es la de un producto de un solo ciclo. Con más de un ciclo, ver `ITSD-C.md`.
 

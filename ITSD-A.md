@@ -5,6 +5,8 @@ Mantiene los artefactos y la filosofía de ITSD, pero cambia **quién cierra cad
 
 > ITSD-A **no reemplaza** a ITSD. El nivel **L0** es ITSD clásico, sin cambios. El nivel se declara en `AGENTS.md`.
 
+El modo por ciclos (`ITSD-C.md`) es independiente de este nivel. Un proyecto L0 puede declarar ciclos. Un proyecto L2 también. ITSD-C cambia la lectura y el lugar de los RF. No cambia las compuertas de esta página.
+
 ---
 
 ## Filosofía
@@ -127,7 +129,7 @@ Un **único comando** usado por el agente y por el CI (ver `templates/verify_tem
 5. Build de cada target
 6. Capturas automáticas para revisión visual (opcional)
 
-**Criterios de aceptación ejecutables:** cada `RF-XXX` de `00_spec.md` debe mapear a uno o más tests, o declarar explícitamente "verificación manual en demo". Un RF sin verificación no está listo.
+**Criterios de aceptación ejecutables:** cada `RF-XXX` del núcleo y, si el proyecto declara ciclos, cada `RF-XXX` del ciclo en curso debe mapear a uno o más tests, o declarar explícitamente "verificación manual en demo". Un RF sin verificación no está listo.
 
 ---
 
@@ -152,7 +154,7 @@ Lo actualiza el agente al cerrar cada tarea: fase actual, último checkpoint ver
 ## Definición de Hecho y Demo de Aceptación
 
 El trabajo está **hecho** cuando:
-- Todos los RF están verdes en la matriz RF → verificación.
+- Todos los RF del núcleo y, si hay ciclos declarados, los del ciclo en curso están verdes en la matriz RF → verificación. Los de un ciclo cerrado no se vuelven a contar.
 - `verify.sh` en verde.
 - El artefacto está publicado (ver *Entrega*).
 - `03_state.md` está cerrado.
@@ -214,6 +216,8 @@ proyecto/
     └── 04_acceptance.md     # guion de demo humana
 ```
 
+Con ciclos declarados, el árbol de lectura pasa a ser el de `ITSD-C.md`. Este árbol sigue siendo el del primer ciclo y el de un proyecto sin ciclos.
+
 ## Flujo (L2)
 
 ```
@@ -261,6 +265,7 @@ IDEA DEL USUARIO
 | Costo/tiempo fuera de control | Presupuestos declarados con parada automática |
 | Pérdida de trazabilidad por velocidad | Commits por RF, ADR no bloqueantes, reporte estándar |
 | Confusión ITSD vs ITSD-A | Nivel declarado en `AGENTS.md`; L0 = ITSD clásico |
+| Confusión entre ciclos y nivel de autonomía | Secciones distintas en `AGENTS.md`. ITSD-C no sube ni baja L |
 
 ---
 
