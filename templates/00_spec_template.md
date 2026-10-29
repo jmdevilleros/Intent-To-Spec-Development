@@ -1,10 +1,14 @@
 # [Nombre del Proyecto] - Especificación Detallada
 
-**Versión:** 1.0  
-**Fecha:** YYYY-MM-DD  
+**Versión:** 1.0
+**Fecha:** YYYY-MM-DD
 **Estado:** [Borrador | Revisado | Aprobado]
 
 Breve descripción del producto (una o dos oraciones).
+
+Cada requisito tiene un solo archivo vigente. En un solo ciclo, los RF van en este archivo. Con ciclos declarados, aquí solo van las reglas que cruzan ciclos, con sus valores. Los RF del ciclo van en el spec de ese ciclo.
+
+Los RF describen comportamiento observable y su criterio de aceptación. Tecnologías, estructura de carpetas y restricciones son decisiones ya tomadas.
 
 ## 1. Tecnologías
 
@@ -16,8 +20,8 @@ Breve descripción del producto (una o dos oraciones).
 ## 2. Requerimientos Funcionales
 
 ### RF-001 - Nombre del requerimiento
-**Descripción:**  
-**Criterios de aceptación:**  
+**Descripción:**
+**Criterios de aceptación:**
 - ...
 - ...
 
@@ -49,5 +53,6 @@ Descripción general de la arquitectura de carpetas esperada.
 
 - ...
 
-**Aprobación del Usuario:**  
-- [ ] Aprobado por el usuario en fecha: _______________
+**Aprobación:**
+- [ ] L0 y L1: aprobado por el usuario en fecha: _______________
+- [ ] L2 y L3: notificado en fecha: _______________. No se espera aprobación.

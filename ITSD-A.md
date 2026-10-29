@@ -3,7 +3,11 @@
 **Modo de ITSD con niveles de autonomía para agentes de IA**  
 Mantiene los artefactos y la filosofía de ITSD, pero cambia **quién cierra cada compuerta** y **cómo se verifica**: la persona aporta intención, gusto y la prueba final; el agente ejecuta, verifica y entrega.
 
-> ITSD-A **no reemplaza** a ITSD. El nivel **L0** es ITSD clásico, sin cambios. El nivel se declara en `AGENTS.md`.
+> ITSD-A **no reemplaza** a ITSD. L0 conserva las compuertas y el git de ITSD clásico. El entregable de la fase ITSD 0 es `docs/00_intent.md` en todos los niveles.
+
+El modo por ciclos (`ITSD-C.md`) es independiente de este nivel. Un proyecto L0 puede declarar ciclos. Un proyecto L2 también. ITSD-C cambia la lectura y el lugar de los RF. No cambia las compuertas de esta página.
+
+**Dos numeraciones.** Fase ITSD es la 0, la 1, la 2, la 3 o la 4 del método. Fase del plan es un heading de `docs/01_plan.md` o del plan del ciclo, y su número es el del producto. Una regla operativa nombra cuál de las dos es. «Fase 0» a «Fase 4» nombran solo fases ITSD.
 
 ---
 
@@ -21,30 +25,46 @@ ITSD elimina la ambigüedad antes de escribir código. ITSD-A añade una premisa
 
 | Nivel | El agente hace solo | La persona conserva |
 |-------|---------------------|---------------------|
-| **L0** (ITSD clásico) | Escribe código | Todo: aprobación de spec y fases, Git |
-| **L1** Asistido | Commits en rama propia; ejecuta fases seguidas | Aprobación formal de spec, merge |
+| **L0** (ITSD clásico) | Escribe código | Compuertas y git de L0: aprobación del spec y de cada fase del plan; commits de la persona |
+| **L1** Asistido | Commits en `agent/<tarea>`, sin PR; fases del plan seguidas | Aprobación formal del spec, merge |
 | **L2** Autónomo supervisado *(recomendado)* | + PR, pre-releases, instalación de SDKs y herramientas | Intención, decisiones de gusto, resumen de intención (con timeout), demo final, merge a `main` |
 | **L3** Autónomo | + merge con CI verde, release interno | Intención y prueba final; recibe notificaciones y puede vetar |
 
 **Reglas:**
-- El nivel se declara en `AGENTS.md` (`Nivel de autonomía: L2`).
-- El agente puede **bajar** de nivel por sí mismo (p. ej., si quedan bloqueantes); nunca **subir** sin autorización.
+- Hasta que existe `AGENTS.md`, el nivel es el de `docs/00_intent.md`. Desde que existe, el nivel es el de `AGENTS.md`.
+- Bajar de nivel escribe el mismo valor en `docs/00_intent.md` y en `AGENTS.md` si ese archivo existe.
+- Subir de nivel solo con autorización de la persona, escrita en los dos archivos.
+- Si los dos existen y discrepan, no se escribe código: se muestran los dos valores y se deja el menor en los dos.
 
 ---
 
+## Tabla de compuertas
+
+Esta tabla es la única. El diagnóstico de abajo no añade otra política.
+
+| Cierre | L0 | L1 | L2 | L3 |
+|---|---|---|---|---|
+| Intención | El usuario responde. Si no hay stack, se recomienda uno después de saber el alcance y se espera un sí. | Igual, con tope de 5–7 preguntas. Si quedan bloqueantes, se baja a L1 o a L0. | Igual, más el resumen con timeout. Sin respuesta se sigue con los supuestos. | El resumen se notifica y no se espera. |
+| Spec | Aprobación explícita en el spec. | Aprobación explícita en el spec. | Notificación. El timeout ya ocurrió en el resumen. | Notificación. |
+| Plan y `AGENTS.md` | Se muestran. La ejecución espera la casilla de cierre del plan. | Notificación. | Notificación. | Notificación. |
+| Cada fase del plan | Checkpoint verde y aceptación del usuario antes de marcarla `[x]`. | Checkpoint verde. | Checkpoint verde. | Checkpoint verde. |
+| Git | La persona hace los commits. | Commits en `agent/<tarea>`. Sin PR y sin merge. | Además, PR y pre-release. El merge lo hace la persona. | Además, merge con CI verde y release interno. |
+| ADR | Se escribe antes de modificar código. | Se escribe y se continúa, salvo regla de parada. | Igual que L1. | Igual que L1. |
+| Sesión | Una o dos fases del plan. | El tope es el presupuesto. La posición queda en `docs/03_state.md`. | Igual que L1. | Igual que L1. |
+
+El release público lo hace la persona. `AGENTS.md` puede decir `Release público: L3`. Sin esa línea, L3 publica solo el release interno.
+
 ## Diagnóstico de Compuertas (ITSD → ITSD-A)
 
-| Compuerta ITSD | Tratamiento en ITSD-A |
-|----------------|----------------------|
-| Fase 0: entrevista de intención | **Se mantiene, acotada**: máx. 5–7 preguntas por impacto (ver *Intención suficiente*) |
-| "Nunca asumir tecnologías" | **Se reemplaza** por "asumir con evidencia y registrar" (supuesto o ADR) |
-| Aprobación formal de la spec | L1: se mantiene. L2: resumen con timeout. L3: notificación sin espera |
-| Plan y `AGENTS.md` | **Notificación** (incluidos en el reporte) |
-| Aprobación por fase | **Se elimina**: la compuerta es el checkpoint automático |
-| Checkpoints manuales | **Verificación automática** (`verify.sh`); solo *feel*/hardware quedan para la demo |
-| "La IA no hace commits" | **Política de ramas**: el agente commitea en su rama y abre PR; `main` protegido |
-| ADR antes de implementar | **Se mantiene, no bloqueante**: se registra y se continúa salvo regla de parada |
-| "1–2 fases por sesión" | **Archivo de estado** (`docs/03_state.md`) para reanudar en cualquier sesión |
+| Compuerta clásica | Dónde quedó |
+|-------------------|-------------|
+| Fase ITSD 0: entrevista | L0: las seis preguntas de ITSD. L1–L3: esta página, tope de 5–7 |
+| Cerrar una tecnología | L0: con un sí. L1–L3: supuesto o ADR, según la tabla |
+| Aprobación del spec, del plan y de cada fase del plan | La tabla |
+| Checkpoint | `verify.sh` en L1–L3. En L0, el comando de la fase del plan y la aceptación del usuario |
+| Commits | La fila Git de la tabla. `main` protegido |
+| ADR antes de implementar | La fila ADR de la tabla |
+| Una o dos fases del plan por sesión | La fila Sesión de la tabla |
 
 ---
 
@@ -60,11 +80,13 @@ Toda pregunta abierta se clasifica:
 | **Supuesta** | Tiene un default razonable y es reversible | **El agente** decide | `00_intent.md` → Supuestos (con justificación) |
 | **Diferida** | Se resuelve mejor con evidencia durante la implementación | **El agente**, más tarde | `docs/02_decisions.md` (ADR) |
 
-**Reglas de la entrevista:**
-- Máximo **5–7 preguntas**, ordenadas por impacto (primero las bloqueantes de experiencia central).
-- Si tras el tope **quedan bloqueantes**, el proyecto **baja a L1 o L0** (no se fuerza autonomía con ambigüedad crítica).
+L0 no usa este tope. L0 usa las preguntas de la fase ITSD 0. En L0 la tecnología se cierra con un sí.
 
-**La entrevista termina cuando se cumplen las tres condiciones:**
+**Reglas de la entrevista (L1–L3):**
+- Máximo **5–7 preguntas**, ordenadas por impacto (primero las bloqueantes de experiencia central).
+- Si tras el tope **quedan bloqueantes**, el proyecto **baja a L1 o L0**. El nivel nuevo se escribe en `docs/00_intent.md` y, si existe, en `AGENTS.md`.
+
+**En L1–L3, la entrevista termina cuando se cumplen las tres condiciones:**
 1. No quedan preguntas **bloqueantes** abiertas.
 2. Cada RF previsto se puede convertir en un **criterio de aceptación verificable**.
 3. Se muestra a la persona un **resumen de una pantalla** (decidido vs. supuesto).
@@ -74,13 +96,13 @@ Toda pregunta abierta se clasifica:
 - **L2:** timeout (p. ej. **24 h**); sin respuesta → se procede con los supuestos.
 - **L3:** sin espera; el resumen es solo notificación.
 
-Una vez iniciada la ejecución, el agente **solo vuelve** a la persona por **reglas de parada**.
+En L1–L3, una vez iniciada la ejecución, el agente **solo vuelve** a la persona por **reglas de parada**. En L0, además, espera la aceptación del usuario antes de marcar `[x]` cada fase del plan.
 
 ---
 
 ## Reglas de Parada y Escalamiento
 
-El agente se detiene y pregunta **solo** si:
+En L1–L3 el agente se detiene y pregunta **solo** si:
 
 | Regla | Ejemplos |
 |-------|----------|
@@ -91,16 +113,20 @@ El agente se detiene y pregunta **solo** si:
 | **Nueva bloqueante** | Aparece una pregunta que define la experiencia central, costosa de revertir o de gusto |
 | **Presupuesto agotado** | Tiempo, intentos o costo superan los límites declarados |
 
-Fuera de estas reglas, el agente **decide, registra (supuesto o ADR) y continúa**.
+En L1–L3, fuera de estas reglas, el agente **decide, registra (supuesto o ADR) y continúa**.
 
 ---
 
 ## Política de Git, Ramas y Releases
 
-- El agente trabaja en una rama `agent/<tarea>` (o un *git worktree* propio).
-- Commits pequeños que referencian fase o RF: `feat(F2): RF-004 colisiones`.
-- **PR por hito**, con CI (`verify.sh`) obligatorio en verde.
-- Tags de pre-release: `vX.Y.Z-rcN`. Releases públicos: solo la persona (o L3 si está autorizado).
+Repite la fila Git de la tabla de compuertas.
+
+- L0: los commits los hace la persona.
+- L1: el agente trabaja en `agent/<tarea>` (o un *git worktree* propio) y hace commits. No abre PR y no hace merge.
+- L2: además, PR por hito con `verify.sh` en verde, y tags de pre-release `vX.Y.Z-rcN`. El merge lo hace la persona.
+- L3: además, merge con CI verde y release interno.
+- El release público lo hace la persona. Solo lo hace el agente si `AGENTS.md` dice `Release público: L3`.
+- Commit que referencia la fase del plan y el RF: `feat(plan-2): RF-004 colisiones`.
 - **Prohibido:** force-push a `main`, reescribir historia publicada, commitear secretos.
 
 ---
@@ -127,14 +153,16 @@ Un **único comando** usado por el agente y por el CI (ver `templates/verify_tem
 5. Build de cada target
 6. Capturas automáticas para revisión visual (opcional)
 
-**Criterios de aceptación ejecutables:** cada `RF-XXX` de `00_spec.md` debe mapear a uno o más tests, o declarar explícitamente "verificación manual en demo". Un RF sin verificación no está listo.
+**Criterios de aceptación ejecutables:** cada `RF-XXX` del núcleo y, si el proyecto declara ciclos, cada `RF-XXX` del ciclo en curso debe mapear a uno o más tests, o declarar explícitamente "verificación manual en demo". Un RF sin verificación no está listo.
+
+Un `verify.sh` que todavía contiene `pending` no está verde.
 
 ---
 
 ## Bucle de Autocrítica
 
-Antes de cerrar cada fase:
-- Diff contra la spec (¿se cumplen los RF de la fase? ¿hay *features* fuera de spec?).
+Antes de cerrar cada fase del plan:
+- Diff contra la spec (¿se cumplen los RF de la fase del plan? ¿hay *features* fuera de spec?).
 - `verify.sh` en verde.
 - Revisión crítica (idealmente un segundo agente o checklist): RF incumplidos, deuda, riesgos.
 - Hallazgos → se corrigen o se registran en `02_decisions.md`.
@@ -145,14 +173,14 @@ Antes de cerrar cada fase:
 
 **Archivo:** `docs/03_state.md` (ver `templates/03_state_template.md`)
 
-Lo actualiza el agente al cerrar cada tarea: fase actual, último checkpoint verde, tarea en curso, bloqueos, supuestos abiertos, siguiente paso y dueño del lock. Permite reanudar desde cualquier sesión o agente.
+Lo actualiza el agente al cerrar cada tarea: fase del plan actual, ciclo en curso si lo hay, último checkpoint verde, tarea en curso, bloqueos, supuestos abiertos, siguiente paso y dueño del lock. Permite reanudar desde cualquier sesión o agente. Si el ciclo en curso difiere de `AGENTS.md`, manda `AGENTS.md` y se corrige el estado antes de editar código.
 
 ---
 
 ## Definición de Hecho y Demo de Aceptación
 
 El trabajo está **hecho** cuando:
-- Todos los RF están verdes en la matriz RF → verificación.
+- Todos los RF del núcleo y, si hay ciclos declarados, los del ciclo en curso están verdes en la matriz RF → verificación. Los de un ciclo cerrado no se vuelven a contar.
 - `verify.sh` en verde.
 - El artefacto está publicado (ver *Entrega*).
 - `03_state.md` está cerrado.
@@ -172,7 +200,7 @@ La **demo de aceptación** es la compuerta final humana: lo no automatizable (se
 ## Presupuestos
 
 Declarados en `AGENTS.md`:
-- Tiempo máximo por fase.
+- Tiempo máximo por fase del plan.
 - Intentos máximos por checkpoint (*K*).
 - Tope de costo (tokens / dinero).
 
@@ -214,6 +242,8 @@ proyecto/
     └── 04_acceptance.md     # guion de demo humana
 ```
 
+Con ciclos declarados, el árbol de lectura pasa a ser el de `ITSD-C.md`. Este árbol sigue siendo el del primer ciclo y el de un proyecto sin ciclos.
+
 ## Flujo (L2)
 
 ```
@@ -230,11 +260,11 @@ IDEA DEL USUARIO
 └──────┬───────┘
        ▼
 ┌──────────────┐
-│ Fase 2-3     │  01_plan.md, AGENTS.md, verify.sh, entorno (automático)
+│ Fase 2-3     │  plan, scaffold mínimo, AGENTS.md, verify.sh
 └──────┬───────┘
        ▼
 ┌──────────────┐
-│ Fase 4-A     │  En rama: implementar → verify.sh → autocrítica → commit → 03_state
+│ Fase 4-A     │  Fase del plan: verify.sh → autocrítica → commit → 03_state
 │ Ejecución    │  sin compuertas; solo reglas de parada
 └──────┬───────┘
        ▼
@@ -246,6 +276,8 @@ IDEA DEL USUARIO
 │ Demo         │  04_acceptance.md ← la persona prueba y acepta → merge/release
 └──────────────┘
 ```
+
+En las fases ITSD 2 y 3, el scaffold mínimo ocurre antes de escribir `AGENTS.md`. El scaffold no es la fase 1 del plan.
 
 ---
 
@@ -261,6 +293,7 @@ IDEA DEL USUARIO
 | Costo/tiempo fuera de control | Presupuestos declarados con parada automática |
 | Pérdida de trazabilidad por velocidad | Commits por RF, ADR no bloqueantes, reporte estándar |
 | Confusión ITSD vs ITSD-A | Nivel declarado en `AGENTS.md`; L0 = ITSD clásico |
+| Confusión entre ciclos y nivel de autonomía | Secciones distintas en `AGENTS.md`. ITSD-C no sube ni baja L |
 
 ---
 
