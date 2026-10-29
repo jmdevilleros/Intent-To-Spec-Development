@@ -38,10 +38,11 @@ En la carpeta `templates/` encontrarás plantillas listas para usar en tus proye
 
 | Template | Fase | Descripción |
 |----------|------|-------------|
-| `templates/00_spec_template.md` | Fase 1 | Especificación detallada de requerimientos |
-| `templates/01_plan_template.md` | Fase 2 | Plan de implementación con fases y checkpoints |
-| `templates/AGENTS_template.md` | Fase 3 | Reglas y convenciones para agentes de IA |
-| `templates/02_decisions_template.md` | Fase 4 | Registro de decisiones de arquitectura (ADR) |
+| `templates/00_intent_template.md` | Fase ITSD 0 | Intención y nivel. L0 usa una parte. L1–L3 lo completan. |
+| `templates/00_spec_template.md` | Fase ITSD 1 | Especificación detallada de requerimientos |
+| `templates/01_plan_template.md` | Fase ITSD 2 | Plan de implementación. Forma de un solo ciclo y forma con ciclos. |
+| `templates/AGENTS_template.md` | Fase ITSD 3 | Reglas y convenciones para agentes de IA |
+| `templates/02_decisions_template.md` | Fase ITSD 4 | Registro de decisiones de arquitectura (ADR) |
 
 ---
 
@@ -145,7 +146,7 @@ En los agentes que permiten invocar skills como comando, también puedes llamarl
 /itsd-dev continuar    # retomar la siguiente fase pendiente del plan
 ```
 
-El agente seguirá las 5 fases de ITSD (Fase 0 a Fase 4): Captura de Intención → Especificación → Plan → Reglas de Agentes → Ejecución. Si el `AGENTS.md` del proyecto declara un nivel de autonomía L1–L3, aplica además [ITSD-A](./ITSD-A.md).
+El agente seguirá las 5 fases ITSD (Fase 0 a Fase 4): Captura de Intención → Especificación → Plan → Reglas de Agentes → Ejecución. La fase ITSD 3 incluye el scaffold mínimo y, después, `AGENTS.md` con los comandos que ese scaffold ya ejecutó. Si el `AGENTS.md` del proyecto declara un nivel de autonomía L1–L3, aplica además [ITSD-A](./ITSD-A.md). Si todavía no existe, el nivel es el de `docs/00_intent.md`.
 
 Si además declara ciclos, la lectura de sesión sigue [ITSD-C](./ITSD-C.md).
 

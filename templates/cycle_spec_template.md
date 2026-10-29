@@ -2,7 +2,9 @@
 
 **Versión:** 0.1
 **Fecha:** YYYY-MM-DD
-**Estado:** [Borrador | Aprobado]
+**Estado:** [Borrador | Aprobado | Notificado]
+
+L0 y L1: Aprobado con el sí del usuario. L2 y L3: Notificado. No se espera aprobación.
 **Depende de:** `docs/00_spec.md`. No reescribe el ciclo anterior ni las reglas del núcleo.
 
 Qué cambia en este ciclo, en un párrafo. Qué sigue igual, en una frase.
@@ -40,4 +42,5 @@ Los parámetros compartidos están en el núcleo, con sus valores. No se remite 
 - ...
 
 **Aprobación:**
-- [ ] Aprobado por la compuerta del nivel declarado, en fecha: _______________
+- [ ] L0 y L1: aprobado por el usuario en fecha: _______________
+- [ ] L2 y L3: notificado en fecha: _______________. No se espera aprobación.

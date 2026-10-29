@@ -6,17 +6,19 @@ ITSD-C no reemplaza a ITSD ni a ITSD-A. No añade fases. No cambia los niveles L
 
 El proyecto lo declara en `AGENTS.md`. Sin esa declaración hay un solo `docs/00_spec.md`, un solo `docs/01_plan.md` y un solo `docs/02_decisions.md`, y la sesión los lee enteros.
 
+**Dos numeraciones.** Fase ITSD es la 0, la 1, la 2, la 3 o la 4 del método. Fase del plan es un heading de `docs/01_plan.md` o del plan del ciclo, y su número es el del producto. Una regla operativa nombra cuál de las dos es. «Fase 0» a «Fase 4» nombran solo fases ITSD.
+
 ---
 
 ## Cuándo usarlo
 
 Úsalo cuando el segundo ciclo de producto se escribiría, de otro modo, dentro del spec o del plan únicos, o cuando la lectura de sesión incluiría un ciclo ya cerrado.
 
-El primer ciclo se construye con las fases 0 a 4 y deja el núcleo. ITSD-C empieza al abrir el segundo ciclo.
+El primer ciclo se construye con las fases ITSD 0 a 4 y deja el núcleo. ITSD-C empieza al abrir el segundo ciclo.
 
 ## Qué es un ciclo
 
-Un ciclo es un incremento acotado del producto. Tiene su propia intención, sus propios requerimientos y un plan con fases verificables. Depende del núcleo y no lo reescribe.
+Un ciclo es un incremento acotado del producto. Tiene su propia intención, sus propios requerimientos y sus fases del plan, cada una con checkpoint. Depende del núcleo y no lo reescribe.
 
 El proyecto elige el nombre de cara al usuario: mundo, módulo, capítulo. En la metodología el nombre es **ciclo**.
 
@@ -44,7 +46,7 @@ Estos archivos siguen siendo la lectura de sesión y se quedan cortos:
 |---------|------------|
 | `docs/00_intent.md` | Intención viva, si el proyecto usa ITSD-A |
 | `docs/00_spec.md` | Reglas que cruzan ciclos. Parámetros compartidos incluidos |
-| `docs/01_plan.md` | Plan vivo: apunta a las fases abiertas |
+| `docs/01_plan.md` | Plan vivo: apunta a las fases del plan abiertas y guarda «Última fase del plan cerrada» |
 | `docs/02_decisions.md` | Índice de ADR y el ADR en juego, completo |
 | `docs/03_state.md` | Estado para reanudar, si el proyecto usa ITSD-A |
 
@@ -52,14 +54,14 @@ Estos archivos siguen siendo la lectura de sesión y se quedan cortos:
 
 El ciclo no copia el núcleo con otras palabras.
 
-Al abrir el segundo ciclo se parte el expediente del primero. Los RF propios, los parámetros propios y las fases cerradas pasan al par de ese ciclo. En el núcleo quedan las reglas que cruzan ciclos, con sus valores. `docs/01_plan.md` nombra el ciclo abierto y apunta a su plan. Si existe `docs/00_intent.md`, se reescribe y no cuenta el ciclo cerrado. El texto anterior puede guardarse junto al ciclo. No es obligatorio. El corte es un ADR y dice qué cláusula del expediente único deja de mandar.
+Al abrir el segundo ciclo se parte el expediente del primero. Los RF propios, los parámetros propios y las fases del plan cerradas pasan al par de ese ciclo. En el núcleo quedan las reglas que cruzan ciclos, con sus valores. `docs/01_plan.md` nombra el ciclo abierto, apunta a su plan y guarda «Última fase del plan cerrada». Si existe `docs/00_intent.md`, se reescribe y no cuenta el ciclo cerrado. El texto anterior puede guardarse junto al ciclo. No es obligatorio. El corte es un ADR y dice qué cláusula del expediente único deja de mandar.
 
 ### 2. Par
 
 Cada ciclo tiene dos archivos:
 
 - un spec: qué cambia, de qué depende, qué no reescribe, sus RF y sus parámetros propios;
-- un plan: las fases de ese ciclo, cada una con checkpoint ejecutable.
+- un plan: las fases del plan de ese ciclo, cada una con checkpoint ejecutable.
 
 Los RF del ciclo viven en su spec. La matriz RF → verificación sigue a esos RF. Un RF del núcleo sigue en el núcleo.
 
@@ -69,22 +71,24 @@ Los `RF-XXX` siguen la secuencia del producto, igual que las fases del plan. El 
 
 ### 3. Plan vivo
 
-`docs/01_plan.md` no conserva los checklists del ciclo cerrado. Nombra el ciclo abierto y apunta a su plan.
+`docs/01_plan.md` no conserva los checklists del ciclo cerrado. Nombra el ciclo abierto, apunta a su plan y guarda «Última fase del plan cerrada».
 
-El plan del ciclo contiene solo sus fases. La numeración de fases es una sola para todo el producto: el ciclo siguiente sigue en el número donde terminó el anterior. `03_state.md` habla de esa secuencia.
+El plan del ciclo contiene solo sus fases del plan. La numeración de las fases del plan es una sola para todo el producto: el ciclo siguiente sigue en el número donde terminó el anterior. `docs/03_state.md`, si existe, habla de esa secuencia.
 
 ### 4. Lectura
 
 Al inicio de cada sesión se lee el núcleo y el par del ciclo en curso.
 
+`docs/02_decisions.md` entra en esa lectura: índice y ADR en juego.
+
 No entran en esa lectura:
 
 - el spec o el plan de otro ciclo;
 - un plan cerrado;
-- el archivo de ADR, si existe;
+- `docs/decisions/archive.md`;
 - un roadmap o documento de visión.
 
-Esos archivos se abren cuando la tarea cambia el comportamiento de ese ciclo, cuando nombra ese archivo, o cuando nombra el ADR concreto. Nombrar el producto, o mencionar el ciclo cerrado mientras la tarea es de otro ciclo, no obliga a leerlo.
+Esos archivos se abren cuando la tarea cambia el comportamiento de ese ciclo, cuando nombra ese archivo, o cuando nombra un ADR cuyo texto ya no está en `docs/02_decisions.md`. Nombrar el producto, o mencionar el ciclo cerrado mientras la tarea es de otro ciclo, no obliga a leerlo.
 
 ### 5. La visión no es spec
 
@@ -100,11 +104,13 @@ El texto de los ADR anteriores puede moverse a un archivo, por ejemplo `docs/dec
 
 Una decisión que cambie dónde viven los specs es un ADR. Ese ADR dice qué cláusula anterior deja de mandar. No se borra la cláusula en silencio.
 
+Si el ADR cambia un requisito, la misma tarea edita el único archivo donde ese requisito vive. El ADR no copia el requisito. El cuerpo de un ADR aceptado no se reescribe. Un cambio es un ADR nuevo y el anterior pasa a Obsoleta.
+
 ### 7. Compuerta
 
 Abrir un ciclo repite el tramo que corresponde: intención de lo que el ciclo cambia, spec, plan. Quién aprueba cada compuerta es el nivel declarado en `AGENTS.md`.
 
-- En L0 la persona aprueba el delta y cada fase de código, como en ITSD clásico.
+- En L0 la persona aprueba el delta y cada fase del plan, como en ITSD clásico.
 - En L1–L3 valen las compuertas de `ITSD-A.md`. ITSD-C no las estrecha ni las afloja.
 
 Abrir el segundo ciclo parte el expediente del primero, como dice la regla 1. Abrir un ciclo no reabre el ciclo cerrado y no cambia el nivel.
@@ -151,7 +157,7 @@ Un roadmap, si existe, queda fuera de este árbol de lectura.
 | Plantilla | Uso |
 |-----------|-----|
 | `templates/cycle_spec_template.md` | Spec de un ciclo |
-| `templates/cycle_plan_template.md` | Plan de las fases de ese ciclo |
+| `templates/cycle_plan_template.md` | Fases del plan de ese ciclo |
 
 ## Relación con la regla de lectura clásica
 
@@ -161,7 +167,7 @@ Cuando `AGENTS.md` declara ciclos, `ITSD-C.md` prevalece en tres cosas:
 
 1. Qué archivos entran en la lectura de sesión.
 2. Dónde viven los RF del ciclo.
-3. Dónde está el plan de las fases abiertas.
+3. Dónde están las fases del plan abiertas.
 
 Los commits, las compuertas y las reglas de parada los decide el nivel. Si ITSD-C y el nivel discrepan en la lectura, manda ITSD-C. Si discrepan en commits o compuertas, manda el nivel.
 
